@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import LeftMenu from './Sections/LeftMenu';
 import RightMenu from './Sections/RightMenu';
-import { Drawer, Button, Icon } from 'antd';
+import { Drawer, Button } from 'antd';
 import './Sections/Navbar.css';
+import { AlignRightOutlined } from '@ant-design/icons';
 const Logo = require('../../../assets/images/sportsicon2.png');
 
 function NavBar() {
@@ -33,7 +34,7 @@ function NavBar() {
           type="primary"
           onClick={showDrawer}
         >
-          <Icon type="align-right" />
+          <AlignRightOutlined />
         </Button>
         <Drawer
           title="Basic Drawer"
