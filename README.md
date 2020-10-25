@@ -10,3 +10,14 @@ To use this application,
 3. Type  " npm install " inside the root directory  ( Download Server Dependencies ) 
 4. Type " npm install " inside the client directory ( Download Front-end Dependencies )
 
+
+And you will have to change Icon 
+
+ex) 
+import { Input } from 'antd';
+<Icon type="dislike" /> 
+
+-> change 
+
+import { DislikeOutlined } from '@ant-design/icons'; 
+<DislikeOutlined />
