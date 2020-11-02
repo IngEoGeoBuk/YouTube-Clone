@@ -24,7 +24,7 @@ export default function ContactUs() {
         e.preventDefault();
 
         if(subject !== "" || message !== "") {
-            emailjs.sendForm('gmail', '', e.target, '')
+            emailjs.sendForm('you3667@gmail.com', 'template_20juxq5', e.target, 'user_71SWcHKoMzt5SZWagtE9p')
             .then((result) => {
                 console.log(result.text);
             }, (error) => {

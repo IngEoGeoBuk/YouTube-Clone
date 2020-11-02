@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Card, Avatar, Col, Typography, Row, Button } from 'antd';
 import axios from 'axios';
 import moment from 'moment';
-import ContactUs from '../ContactForm/contactForm'
-import Modal from '../Modal/Modal'
+
 import { useSelector } from "react-redux";
 
 
@@ -12,7 +11,7 @@ const { Meta } = Card;
 
 function LandingPage() {
 
-
+    const user = useSelector(state => state.user)
 
     const [Videos, setVideos] = useState([])
 
@@ -60,9 +59,7 @@ function LandingPage() {
     })
 
     // 추가한거
-    const user = useSelector(state => state.user)
 
-    const [isOpen, setIsOpen] = useState(false)
 
     if(user.userData && !user.userData.isAuth) {
         return (
@@ -79,15 +76,6 @@ function LandingPage() {
             <div style={{ width: '85%', margin: '3rem auto' }}>
                 <div style={{display: 'flex'}}>
                     <Title level={2}> 전체 글 </Title>
-                    <div>
-                    <Button style = {{backgroundColor:'red', color:'white', marginLeft:'0.5rem', marginTop:'0.5rem'}} 
-                        onClick={() => setIsOpen(true)}
-                    > 신고
-                    </Button>
-                    <Modal open={isOpen} onClose={() => setIsOpen(false)}>
-                        <ContactUs/>
-                    </Modal>
-                    </div>
                 </div>
                 <hr />
                 <Row gutter={16}>

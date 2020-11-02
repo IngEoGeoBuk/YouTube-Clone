@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { Typography, Button, Form, message, Input } from 'antd';
+import { Typography, Button, Form, message, Input, Icon } from 'antd';
 import Dropzone from 'react-dropzone';
 import axios from 'axios';
 import { useSelector } from "react-redux";
-import { PlusOutlined } from '@ant-design/icons';
 
 const { Title } = Typography;
 const { TextArea } = Input;
@@ -147,7 +146,7 @@ function UploadVideoPage(props) {
                                 {...getRootProps()}
                             >
                                 <input {...getInputProps()} />
-                                <PlusOutlined style={{ fontSize: '3rem' }} />
+                                <Icon type="plus" style={{ fontSize: '3rem' }} />
 
                             </div>
                         )}
