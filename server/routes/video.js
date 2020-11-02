@@ -143,4 +143,13 @@ router.post("/getSubscriptionVideos", (req, res) => {
     })
 });
 
+router.post('/deleteVideo', (req, res) => {
+    Video.findOneAndDelete({ "_id" : req.body.videoId })
+    .populate('writer')
+    .exec((err, video) => {
+        if(err) return res.status(400).send(err);
+        res.status(200).json({ success: true, video })
+    })
+})
+
 module.exports = router;
