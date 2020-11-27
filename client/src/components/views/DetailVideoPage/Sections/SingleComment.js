@@ -3,12 +3,16 @@ import { Comment, Avatar, Button, Input } from 'antd';
 import Axios from 'axios';
 import { useSelector } from 'react-redux';
 import LikeDislikes from './LikeDislikes';
+// import { response } from 'express';
 
 const { TextArea } = Input;
 function SingleComment(props) {
     const user = useSelector(state => state.user);
     const [CommentValue, setCommentValue] = useState("")
     const [OpenReply, setOpenReply] = useState(false)
+    const [DeleteComment, setDeleteComment] = useState(true)
+
+    const userId = localStorage.getItem('userId');
 
     const handleChange = (e) => {
         setCommentValue(e.currentTarget.value)
@@ -18,16 +22,15 @@ function SingleComment(props) {
         setOpenReply(!OpenReply)
     }
 
+    const variables = {
+        writer: user.userData._id,
+        postId: props.postId,
+        responseTo: props.comment._id,
+        content: CommentValue
+    }
+
     const onSubmit = (e) => {
         e.preventDefault();
-
-        const variables = {
-            writer: user.userData._id,
-            postId: props.postId,
-            responseTo: props.comment._id,
-            content: CommentValue
-        }
-
 
         Axios.post('/api/comment/saveComment', variables)
             .then(response => {
@@ -41,9 +44,32 @@ function SingleComment(props) {
             })
     }
 
+    const deleteComment = () => {
+
+        // console.log(variables.responseTo + '찾아라 commentId')
+
+        if(userId === props.comment.writer._id) {
+            console.log(variables.responseTo + '찾아라 commentId')
+            if(window.confirm('해당 댓글을 삭제하시겠습니까?')) {
+                Axios.post('/api/comment/deleteComment', variables)
+                .then(response => {
+                    if(response.data.success) {
+                        setDeleteComment(!DeleteComment)
+                    } else {
+                        alert('댓글 삭제에 실패했습니다.')
+                    }
+                    return window.location.href = window.location.href;
+                })
+            }
+        } else {
+            alert('회원님이 작성한 댓글이 아닙니다.')
+        }
+    }
+
     const actions = [
         <LikeDislikes comment commentId={props.comment._id} userId={localStorage.getItem('userId')} />,
-        <span onClick={openReply} key="comment-basic-reply-to">답글 </span>
+        <span onClick={openReply} key="comment-basic-reply-to">답글 </span>,
+        <span onClick={deleteComment} key="comment-basic-reply-to">삭제 </span>
     ]
 
     if (user.userData && !user.userData.isAuth) {
