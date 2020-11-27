@@ -37,6 +37,21 @@ router.post("/getComments", (req, res) => {
 
 });
 
+router.post("/deleteComment", (req, res) => {
+
+    // let variable = { commentId: req.body.commentId }
+    // console.log(req.body)
+    const comment = new Comment(req.body)
+
+    Comment.findOneAndDelete({"_id": req.body.responseTo})
+        .populate('writer')
+        .exec((err, doc) => {
+            if(err) return res.status(400).json({ success: false, err })
+            res.status(200).json({ success: true })
+        })
+
+});
+
 
 
 
