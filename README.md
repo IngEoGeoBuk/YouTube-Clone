@@ -1,4 +1,4 @@
-I modified jaewonhimnae's code
+I modified jaewonhimnae's code.
 Add Delete Comment & Video
 
 https://www.youtube.com/watch?v=SsMn8tT3ZBQ&t=4365s
